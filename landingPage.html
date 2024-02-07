@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            /*width: 100%;*/
+            /*height: 100%;*/
+            overflow-x: hidden;
+        }
+        body, html { 
+            width: 100%;
+            /*height: 100%; */
+            overflow-x: hidden;
+       
+       body{
+        font-family: 'MessinaModern', Georgia, Times, 'Times New Roman', serif;
+        }
+
+
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .bg-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scroll-content {
+            width: 100vw; /* Viewport width to ensure it spans the full width */
+            box-sizing: border-box; 
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            /*padding: 50px;*/
+            /*padding-bottom: 50px;*/
+        }
+
+        .scroll-content > div {
+            min-height: 100vh;
+            display: flex;
+            /*flex-direction: column;*/
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .white-background {
+            display: flex;
+            box-sizing: border-box; 
+            justify-content: space-between;
+            width: 100vw; /* Viewport width to ensure it spans the full width */
+            background-color: white;
+            color: black;
+            width: 100%;
+            margin: 0; /* Removes default margins */
+            padding: 50px; /* Removes default padding */
+        }
+   
+        .left-column, .right-column {
+            width: 48%; /* Adjust the width as needed */
+            padding: 10px; /* Add padding for spacing */
+            color: black;
+        }
+
+
+        .company-name {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: white;
+            z-index: 2;
+        }
+
+        .loading-text {
+            display: flex;
+            align-items: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .static-text, .dynamic-text {
+            margin-right: 10px;
+        }
+
+         .company-name {
+            position: fixed; /* Changed from absolute to fixed */
+            top: 35px;
+            right: 42px;
+            font-size: 23px;
+            color: white;
+            z-index: 2;
+            padding: 5px 10px;
+        }
+
+        .scroll-content > div p {
+            width: 65%;
+            margin-left: 7%; /* Align to the left */
+            margin-right: auto; /* Adjust this to set how far right it goes */
+            font-size: 35px;
+            line-height: 1.1;
+            text-align: left; /* Align text to the left */
+            font-weight: 100;
+        }
+        .headline {
+            font-size: 35px; /* Adjust size as needed */
+            font-weight: normal;
+            /* Other styling as needed */
+        }
+
+        .emphasized {
+            font-weight: bold; /* Makes the text bolder */
+        }
+        .white-background .left-column p, .white-background .right-column p {
+            font-weight: normal; /* Sets the font weight to normal */
+            font-size: 29px; /* Adjust the font size if needed */
+            /* Add any additional styling here */
+        }
+           
+         /* Footer styles */
+        .footer {
+          display: flex;
+          justify-content: space-between;
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: black; /* Example background color */
+          color: white;
+          text-align: center;
+          padding: 20px 0;
+          transition: bottom 0.5s ease-in-out;
+          z-index: 10;
+        }
+
+     
+        .footer-hidden {
+          transform: translateY(100%);
+}
+
+        .footer-left, .footer-right {
+          padding: 1.5rem;
+        }
+
+        .footer a {
+          color: white; /* Link color */
+          text-decoration: none;
+          padding: 0.5rem;
+          cursor: pointer;
+
+        }
+
+        .footer a:hover {
+          text-decoration: underline;
+        }
+
+      
+
+        @media (max-width: 768px) {
+          .footer {
+            flex-direction: column;
+            text-align: center;
+            width: 100%;
+          }
+          
+          .footer-right {
+            margin-top: 1rem;
+          }
+          .footer-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+        .footer-right a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px; /* Spacing between links */
+            /* Additional link styles */
+        }
+
+        .footer-right a:hover {
+            text-decoration: underline;
+        }
+
+        }
+         
+        /* Responsive Styles for iPad and smaller screens */
+        @media screen and (max-width: 768px) {
+            .loading-text, .company-name, .scroll-content > div p, .headline {
+                font-size: 24px; /* Smaller font size for readability */
+            }
+
+            .scroll-content, .scroll-content > div, .white-background {
+                padding: 20px; /* Add some padding */
+            }
+
+            .scroll-content > div, .white-background {
+                flex-direction: column; /* Stack content vertically */
+                /*align-item
+                s: center;  Center align items */
+            }
+
+            .white-background .left-column, .white-background .right-column {
+                width: 100%; /* Full width for smaller screens */
+                text-align: left; /* Center align text */
+            }
+            /*.scroll-content > div p{
+                width: 100%;
+                margin-left: 0%;
+            }*/
+             .white-background .left-column p, .white-background .right-column p{
+                 width: 100%;
+                margin-left: 0%;
+                font-size: 20px;
+            }
+        }
+
+        /* Responsive Styles for phone screens */
+        @media screen and (max-width: 480px) {
+            .loading-text, .company-name, .scroll-content > div p, .headline {
+                font-size: 18px; /* Even smaller font size for phone screens */
+            }
+
+            .scroll-content, .scroll-content > div, .white-background {
+                padding: 10px; /* Reduced padding for phone screens */
+            }
+            .white-background .left-column, .white-background .right-column {
+                width: 100%; /* Full width for smaller screens */
+                text-align: left; /* Center align text */
+            }
+           /* .scroll-content > div p{
+                width: 100%;
+                margin-left: 0%;
+            }*/
+            .white-background .left-column p, .white-background .right-column p{
+                 width: 100%;
+                margin-left: 0%;
+                font-size: 20px;
+            }
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="bg-video">
+    <video autoplay loop muted>
+       <!--  <source src="image/backgroundImage12.mp4" type="video/mp4"> -->
+         <source src="image/testing.mp4" type="video/mp4">
+        
+    </video>
+</div>
+
+<div class="scroll-content">
+    <div class="loading-text">
+        <span class="static-text">Loading:</span>
+        <span id="dynamic-text" class="dynamic-text">Something amazing</span>
+    </div>
+    <div>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+    </div>
+    <div class="white-background">
+       <div class="left-column">
+        <div class="headline">
+        <span class="emphasized">AI:</span> Transforming <span class="emphasized">diagnostic</span> <br> medicine, <i>together</i>
+    </div>
+    </div>
+    <div class="right-column">
+        <p><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p></p>
+    </div>
+    </div>
+</div>
+<footer class="footer">
+  <div class="footer-left">
+        <!-- <p>Contact Us: <a href="mailto:email@example.com">email@example.com</a></p> -->
+
+  </div>
+   <div class="footer-right">
+        <p>Contact Us: <a href="mailto:email@example.com">email@example.com</a></p>
+
+  </div>
+  <!-- <div class="footer-right">
+    <a href="#">Lab</a>
+    <a href="#">Publications</a>
+    <a href="#">Team</a>
+  </div> -->
+</footer>
+
+
+<div class="company-name">Modella.AI</div>
+
+<script type="text/javascript">
+    let dynamicTexts = ["Something amazing", "Revolutionizing diagnosis", "Shaping Future Healthcare", "Empowering Pathologists"];
+    let currentIndex = 0;
+
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % dynamicTexts.length;
+        document.getElementById('dynamic-text').textContent = dynamicTexts[currentIndex];
+    }, 5000);
+
+    let lastScrollTop = 0;
+    const footer = document.querySelector('.footer');
+
+    window.addEventListener('scroll', () => {
+    // console.log('Scroll event triggered');
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      let pageHeight = document.documentElement.scrollHeight;
+      let windowHeight = window.innerHeight;
+
+  // Determines if we're at the bottom of the page
+  let bottomOfPage = currentScroll + windowHeight >= pageHeight;
+
+  if (currentScroll > lastScrollTop && !bottomOfPage) {
+    // Scrolling Down and not at the bottom - hide footer
+    footer.style.bottom = `-${footer.offsetHeight}px`;
+  } else {
+    // Scrolling Up or at the bottom - show footer
+    footer.style.bottom = '0';
+  }
+
+  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+}, false);
+
+  
+
+</script>
+
+</body>
+</html>
